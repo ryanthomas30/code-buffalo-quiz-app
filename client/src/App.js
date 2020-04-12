@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
+import styled from 'styled-components'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { FlexBox, Header } from './components'
+
+/* Pages */
+import Home from './pages/Home'
+
+const MainHeader = styled(Header)`
+	background-color: #875FC0;
+	color: white;
+`
+
+const App = () => {
+	return (
+		<FlexBox
+			className='app'
+			align='center'
+			wrap={false}
+		>
+			<MainHeader
+				paddingVertical='medium'
+				paddingHorizontal='large'
+			>
+				<h1 style={{ fontWeight: 800, margin: '0px' }} >Quiz App</h1>
+			</MainHeader>
+			<div className='page' >
+				<Switch>
+					<Route
+						exact
+						path='/'
+						component={Home}
+					/>
+				</Switch>
+			</div>
+
+		</FlexBox>
+	)
 }
 
-export default App;
+export default App
