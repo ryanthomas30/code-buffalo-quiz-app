@@ -5,6 +5,8 @@ import { Card } from './Card'
 import { Header } from './Header'
 import { FlexBox } from './FlexBox'
 import { Label } from './Label'
+import { Button } from './Button'
+import { Icon } from './Icon'
 
 // Height of the card
 const HEIGHT = 150
@@ -18,7 +20,7 @@ const Image = styled.img`
 `
 
 export const UnstyledQuizCard = (props) => {
-	const { className, title = 'Quiz 1', author = 'Joe' } = props
+	const { className, quizId = 0, title = 'Quiz 1', author = 'Joe', onDelete } = props
 	return (
 		<Card
 			direction='row'
@@ -26,22 +28,45 @@ export const UnstyledQuizCard = (props) => {
 		>
 			<Image src='https://picsum.photos/500/300' />
 			<FlexBox
-				padding='medium'
+				paddingHorizontal='medium'
+				paddingVertical='small'
 				grow
 				full='vertical'
 				justify='between'
 			>
-				<FlexBox>
-					<h1>{title}</h1>
+				<FlexBox full='horizontal' >
+					<Header
+						justify='between'
+					>
+						<h1>{title}</h1>
+						<Icon
+							icon='trash'
+							size='sm'
+							onClick={onDelete}
+						/>
+					</Header>
+
 					<Label>
 						Created by
 						{' '}
 						<b>{author}</b>
 					</Label>
 				</FlexBox>
+
 				<Header
-					justify='end'
+					justify='between'
 				>
+					<FlexBox
+						direction='row'
+						marginBetween='small'
+					>
+						<Button label='Take Quiz' />
+						<Button
+							label='Edit Quiz'
+							color='secondary'
+						/>
+					</FlexBox>
+
 					<Label>
 						11/22/2019
 					</Label>

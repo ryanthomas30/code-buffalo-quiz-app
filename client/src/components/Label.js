@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
 export const Label = styled.label`
-	color: #827F7F;
+	color: ${({ color }) => color ? color : '#827F7F'};
 `

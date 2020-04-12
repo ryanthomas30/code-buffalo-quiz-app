@@ -2,6 +2,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+/* Font Awesome Icons */
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
+
 /* React-Router */
 import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
@@ -15,6 +19,8 @@ import App from './App'
 /* Don't worry about this */
 import * as serviceWorker from './serviceWorker'
 const history = createBrowserHistory()
+
+library.add(faTrash, faPlus)
 
 ReactDOM.render(
 	<React.StrictMode>

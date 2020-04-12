@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { FlexBox, Header } from './components'
+import { FlexBox, Header, Button, Link } from './components'
 
 /* Pages */
 import Home from './pages/Home'
@@ -10,6 +10,11 @@ import Home from './pages/Home'
 const MainHeader = styled(Header)`
 	background-color: #875FC0;
 	color: white;
+`
+
+const CreateQuizButton = styled(Button)`
+	height: 44px;
+	font-size: 14px;
 `
 
 const App = () => {
@@ -22,8 +27,16 @@ const App = () => {
 			<MainHeader
 				paddingVertical='medium'
 				paddingHorizontal='large'
+				justify='between'
 			>
-				<h1 style={{ fontWeight: 800, margin: '0px' }} >Quiz App</h1>
+				<Link to='/' >
+					<h1 style={{ fontWeight: 800, margin: '0px' }} >Quiz App</h1>
+				</Link>
+				<CreateQuizButton
+					label='Create Quiz'
+					color='secondary'
+					icon='plus'
+				/>
 			</MainHeader>
 			<div className='page' >
 				<Switch>
