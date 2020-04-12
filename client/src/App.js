@@ -6,6 +6,7 @@ import { FlexBox, Header, Button, Link } from './components'
 
 /* Pages */
 import Home from './pages/Home'
+import CreateQuiz from './pages/CreateQuiz'
 
 const MainHeader = styled(Header)`
 	background-color: #875FC0;
@@ -36,6 +37,7 @@ const App = () => {
 					label='Create Quiz'
 					color='secondary'
 					icon='plus'
+					path='/quiz/new'
 				/>
 			</MainHeader>
 			<div className='page' >
@@ -45,9 +47,12 @@ const App = () => {
 						path='/'
 						component={Home}
 					/>
+					<Route
+						path='/quiz/new'
+						component={CreateQuiz}
+					/>
 				</Switch>
 			</div>
-
 		</FlexBox>
 	)
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 import { FlexBox } from './FlexBox'
 import { Icon } from './Icon'
+import { Link } from './Link'
 
 const UnstyledButton = (props) => {
 	const { children, label, path, onClick, full, disabled, icon, type = 'button', style, className } = props
@@ -40,7 +40,6 @@ const UnstyledButton = (props) => {
 		return (
 			<Link
 				to={path}
-				className='link'
 				style={{ width: full ? '100%' : '' }}
 			>
 				{buttonInner}
@@ -69,6 +68,7 @@ export const Button = styled(UnstyledButton)`
 	height: 34px;
 	background-color: ${({ color = 'primary' }) => getColor(color)};
 	transition: all ease-in-out 200ms;
+	opacity: ${({ disabled }) => disabled ? 0.6 : 'inherit'};
 	&:hover {
 		filter: brightness(110%)
 	}
