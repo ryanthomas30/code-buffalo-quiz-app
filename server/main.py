@@ -27,11 +27,11 @@ class Quiz(BaseModel):
     questions: List[Question]
 
 
-@app.get('/quizzes')
+@app.get('/quizzes', response_model=List[Quiz])
 def get_all_quizzes():
     return session.query(models.Quiz).all()
 
-@app.get('/quiz/{quiz_id}')
+@app.get('/quiz/{quiz_id}', response_model=Quiz)
 def get_quiz_by_id(quiz_id: int):
     quiz = session.query(models.Quiz).filter(models.Quiz.id == quiz_id).first()
     if not quiz:
@@ -39,7 +39,7 @@ def get_quiz_by_id(quiz_id: int):
 
     return quiz
 
-@app.post('/quiz')
+@app.post('/quiz', response_model=Quiz)
 def create_quiz(quiz: Quiz):
     new_quiz = models.Quiz(quiz.title, quiz.author)
     session.add(new_quiz)
@@ -62,7 +62,7 @@ def create_quiz(quiz: Quiz):
 
     return new_quiz
 
-@app.delete('/quiz/{quiz_id}')
+@app.delete('/quiz/{quiz_id}', response_model=Quiz)
 def delete_quiz_by_id(quiz_id: int):
     quiz = session.query(models.Quiz).filter(models.Quiz.id == quiz_id).first()
     if not quiz:
