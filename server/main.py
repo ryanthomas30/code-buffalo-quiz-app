@@ -1,9 +1,10 @@
 from typing import List
 
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
 
 import models
+import schemas
+
 from database import session, engine
 
 # Creates all of the tables in the database. Not really the best approach though,
@@ -13,27 +14,13 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 
-class Question(BaseModel):
-    question_text: str
-    correct_answer: int
-    answer_one: str
-    answer_two: str
-    answer_three: str = None
-    answer_four: str = None
-
-class Quiz(BaseModel):
-    title: str
-    author: str
-    questions: List[Question]
-
-
-@app.get('/quizzes', response_model=List[Quiz])
+@app.get('/quizzes', response_model=List[schemas.QuizResponse])
 def get_all_quizzes():
     """Get all of the quizzes
     """
     return session.query(models.Quiz).all()
 
-@app.get('/quiz/{quiz_id}', response_model=Quiz)
+@app.get('/quiz/{quiz_id}', response_model=schemas.QuizResponse)
 def get_quiz_by_id(quiz_id: int):
     """Get a specific quiz by its id
     """
@@ -43,8 +30,8 @@ def get_quiz_by_id(quiz_id: int):
 
     return quiz
 
-@app.post('/quiz', response_model=Quiz)
-def create_quiz(quiz: Quiz):
+@app.post('/quiz', response_model=schemas.QuizResponse)
+def create_quiz(quiz: schemas.CreateQuizRequest):
     """Create a new quiz
     """
     new_quiz = models.Quiz(quiz.title, quiz.author)
@@ -68,7 +55,7 @@ def create_quiz(quiz: Quiz):
 
     return new_quiz
 
-@app.delete('/quiz/{quiz_id}', response_model=Quiz)
+@app.delete('/quiz/{quiz_id}', response_model=schemas.QuizResponse)
 def delete_quiz_by_id(quiz_id: int):
     """Delete a specific quiz by its id
     """
