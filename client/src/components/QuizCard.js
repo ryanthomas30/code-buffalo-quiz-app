@@ -26,7 +26,7 @@ export const UnstyledQuizCard = (props) => {
 			direction='row'
 			className={className}
 		>
-			<Image src='https://picsum.photos/500/300' />
+			<Image src={`https://picsum.photos/200/200?random=${Math.floor(Math.random() * 100)}`} />
 			<FlexBox
 				paddingHorizontal='medium'
 				paddingVertical='small'
