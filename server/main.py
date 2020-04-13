@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 import models
@@ -31,11 +31,20 @@ class Quiz(BaseModel):
 def get_all_quizzes():
     return session.query(models.Quiz).all()
 
+@app.get('/quiz/{quiz_id}')
+def get_quiz_by_id(quiz_id: int):
+    quiz = session.query(models.Quiz).filter(models.Quiz.id == quiz_id).first()
+    if not quiz:
+        raise HTTPException(status_code=400, detail=f'Quiz with id {quiz_id} does not exist')
+
+    return quiz
+
 @app.post('/quiz')
 def create_quiz(quiz: Quiz):
     new_quiz = models.Quiz(quiz.title, quiz.author)
     session.add(new_quiz)
     session.commit()
+    session.refresh(new_quiz)
 
     for question in quiz.questions:
         new_question = models.Question(
@@ -50,6 +59,5 @@ def create_quiz(quiz: Quiz):
 
         session.add(new_question)
     session.commit()
-    session.refresh(new_quiz)
 
     return new_quiz
