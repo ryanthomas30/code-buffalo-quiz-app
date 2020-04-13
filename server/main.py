@@ -29,10 +29,14 @@ class Quiz(BaseModel):
 
 @app.get('/quizzes', response_model=List[Quiz])
 def get_all_quizzes():
+    """Get all of the quizzes
+    """
     return session.query(models.Quiz).all()
 
 @app.get('/quiz/{quiz_id}', response_model=Quiz)
 def get_quiz_by_id(quiz_id: int):
+    """Get a specific quiz by its id
+    """
     quiz = session.query(models.Quiz).filter(models.Quiz.id == quiz_id).first()
     if not quiz:
         raise HTTPException(status_code=400, detail=f'Quiz with id {quiz_id} does not exist')
@@ -41,6 +45,8 @@ def get_quiz_by_id(quiz_id: int):
 
 @app.post('/quiz', response_model=Quiz)
 def create_quiz(quiz: Quiz):
+    """Create a new quiz
+    """
     new_quiz = models.Quiz(quiz.title, quiz.author)
     session.add(new_quiz)
     session.commit()
@@ -64,6 +70,8 @@ def create_quiz(quiz: Quiz):
 
 @app.delete('/quiz/{quiz_id}', response_model=Quiz)
 def delete_quiz_by_id(quiz_id: int):
+    """Delete a specific quiz by its id
+    """
     quiz = session.query(models.Quiz).filter(models.Quiz.id == quiz_id).first()
     if not quiz:
         raise HTTPException(status_code=400, detail=f'Quiz with id {quiz_id} does not exist')
