@@ -8,10 +8,12 @@ class Quiz(Base):
 
     id = Column(Integer, primary_key=True)
     title = Column(String)
+    author = Column(String)
     questions = relationship('Question')
 
-    def __init__(self, title: str):
+    def __init__(self, title: str, author: str):
         self.title = title
+        self.author = author
 
 class Question(Base):
     __tablename__ = 'questions'

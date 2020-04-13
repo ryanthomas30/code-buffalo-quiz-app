@@ -23,12 +23,13 @@ class Question(BaseModel):
 
 class Quiz(BaseModel):
     title: str
+    author: str
     questions: List[Question]
 
 
 @app.post("/quiz")
 def create_quiz(quiz: Quiz):
-    new_quiz = models.Quiz(quiz.title)
+    new_quiz = models.Quiz(quiz.title, quiz.author)
     session.add(new_quiz)
     session.commit()
 
