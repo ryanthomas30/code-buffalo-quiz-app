@@ -27,7 +27,11 @@ class Quiz(BaseModel):
     questions: List[Question]
 
 
-@app.post("/quiz")
+@app.get('/quizzes')
+def get_all_quizzes():
+    return session.query(models.Quiz).all()
+
+@app.post('/quiz')
 def create_quiz(quiz: Quiz):
     new_quiz = models.Quiz(quiz.title, quiz.author)
     session.add(new_quiz)
