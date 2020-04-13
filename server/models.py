@@ -9,7 +9,7 @@ class Quiz(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String)
     author = Column(String)
-    questions = relationship('Question')
+    questions = relationship('Question', backref='parent', passive_deletes=True)
 
     def __init__(self, title: str, author: str):
         self.title = title
@@ -19,7 +19,7 @@ class Question(Base):
     __tablename__ = 'questions'
 
     id = Column(Integer, primary_key=True)
-    quiz_id = Column(Integer, ForeignKey('quizzes.id'))
+    quiz_id = Column(Integer, ForeignKey('quizzes.id', ondelete='CASCADE'))
 
     question_text = Column(String)
     correct_answer = Column(Integer)
