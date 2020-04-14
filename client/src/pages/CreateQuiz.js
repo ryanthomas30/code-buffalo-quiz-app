@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import axios from 'axios'
 
 import { FlexBox, Card, TextInput, Button, Header, Icon } from '../components'
 
@@ -34,6 +36,7 @@ const CreateQuiz = () => {
 	const [title, setTitle] = useState('')
 	const [author, setAuthor] = useState('')
 	const [questions, setQuestions] = useState([{ ...EMPTY_QUESTION }])
+	const history = useHistory()
 
 	const addQuestion = () => {
 		setQuestions([...questions, { ...EMPTY_QUESTION }])
@@ -51,13 +54,20 @@ const CreateQuiz = () => {
 		setQuestions(updatedQuestions)
 	}
 
-	const submitQuiz = () => {
+	const submitQuiz = async () => {
 		const quiz = {
 			title,
 			author,
 			questions,
 		}
-		console.log('quiz:', quiz)
+		await axios.post(`${process.env.REACT_APP_BASE_URI}/quiz`, {
+			...quiz
+		})
+		setTitle('')
+		setAuthor('')
+		setQuestions([{ ...EMPTY_QUESTION }])
+
+		history.push('/')
 	}
 
 	const renderQuestions = () => questions.map((q, i) =>

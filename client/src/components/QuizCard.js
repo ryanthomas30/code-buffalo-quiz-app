@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import useFetch from 'use-http'
 
 import { Card } from './Card'
 import { Header } from './Header'
@@ -21,11 +20,7 @@ const Image = styled.img`
 `
 
 export const UnstyledQuizCard = (props) => {
-	const { quizId, title, author, className, ...other } = props
-	const [request] = useFetch(`${process.env.REACT_APP_BASE_URI}`)
-	const onDelete = () => {
-		request.delete(`/quiz/${quizId}`)
-	}
+	const { quizId, title, author, className, onDelete, ...other } = props
 
 	return (
 		<Card
@@ -33,7 +28,7 @@ export const UnstyledQuizCard = (props) => {
 			className={className}
 			{...other}
 		>
-			<Image src={`https://picsum.photos/200/200?random=${Math.floor(Math.random() * 100)}`} />
+			<Image src={`https://picsum.photos/200/200?random=${quizId}`} />
 			<FlexBox
 				paddingHorizontal='medium'
 				paddingVertical='small'
@@ -52,14 +47,12 @@ export const UnstyledQuizCard = (props) => {
 							onClick={onDelete}
 						/>
 					</Header>
-
 					<Label>
 						Created by
 						{' '}
 						<b>{author}</b>
 					</Label>
 				</FlexBox>
-
 				<Header
 					justify='between'
 				>
@@ -67,16 +60,15 @@ export const UnstyledQuizCard = (props) => {
 						direction='row'
 						marginBetween='small'
 					>
-						<Button label='Take Quiz' />
+						<Button
+							label='Take Quiz'
+							path={`quiz/${quizId}`}
+						/>
 						<Button
 							label='Edit Quiz'
 							color='secondary'
 						/>
 					</FlexBox>
-
-					<Label>
-						11/22/2019
-					</Label>
 				</Header>
 			</FlexBox>
 		</Card>
