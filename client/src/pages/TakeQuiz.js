@@ -38,16 +38,6 @@ const TakeQuiz = () => {
 		const response = await axios.get(`${process.env.REACT_APP_BASE_URI}/quiz/${quizId}`)
 		const quiz = {
 			...response.data,
-			/* questions: [
-				{
-					question_text: 'How many Joes does it take to have Ligma?',
-					correct_answer: 3,
-					answer_one: '3',
-					answer_two: '4',
-					answer_three: '24',
-					answer_four: '69',
-				}
-			] */
 		}
 		setQuiz(quiz)
 		setLoading(false)
