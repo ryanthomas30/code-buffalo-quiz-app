@@ -29,6 +29,7 @@ export const TextInput = ({ onChange, value, placeHolder, label, error, ...other
 			<Header
 				justify='between'
 				paddingHorizontal={4}
+				paddingBottom={2}
 			>
 				<Label
 					fontSize='11px'
