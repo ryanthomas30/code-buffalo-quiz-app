@@ -55,7 +55,7 @@ const TakeQuiz = () => {
 
 	useEffect(() => {
 		getQuiz()
-	}, [getQuiz])
+	}, [])
 
 	if (loading || !quiz) {
 		return (
