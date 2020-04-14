@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import useFetch from 'use-http'
 
 import { Card } from './Card'
 import { Header } from './Header'
@@ -20,11 +21,17 @@ const Image = styled.img`
 `
 
 export const UnstyledQuizCard = (props) => {
-	const { className, quizId = 0, title = 'Quiz 1', author = 'Joe', onDelete } = props
+	const { quizId, title, author, className, ...other } = props
+	const [request] = useFetch(`${process.env.REACT_APP_BASE_URI}`)
+	const onDelete = () => {
+		request.delete(`/quiz/${quizId}`)
+	}
+
 	return (
 		<Card
 			direction='row'
 			className={className}
+			{...other}
 		>
 			<Image src={`https://picsum.photos/200/200?random=${Math.floor(Math.random() * 100)}`} />
 			<FlexBox
