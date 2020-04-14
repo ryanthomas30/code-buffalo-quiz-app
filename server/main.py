@@ -29,7 +29,7 @@ def get_all_quizzes():
     """
     return session.query(models.Quiz).all()
 
-@app.get('/quiz/{quiz_id}', response_model=schemas.QuizResponse)
+@app.get('/quiz/{quiz_id}', response_model=schemas.SingleQuizResponse)
 def get_quiz_by_id(quiz_id: int):
     """Get a specific quiz by its id
     """

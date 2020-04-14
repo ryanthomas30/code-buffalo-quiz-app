@@ -11,6 +11,9 @@ class Question(BaseModel):
     answer_three: str = None
     answer_four: str = None
 
+    class Config:
+        orm_mode = True
+
 class QuizBase(BaseModel):
     title: str
     author: str
@@ -23,3 +26,6 @@ class QuizResponse(QuizBase):
 
     class Config:
         orm_mode = True
+
+class SingleQuizResponse(QuizResponse):
+    questions: List[Question]
