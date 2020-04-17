@@ -22,6 +22,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get('/')
+def home():
+    return {'home'}
+
 
 @app.get('/quizzes', response_model=List[schemas.QuizResponse])
 def get_all_quizzes():
