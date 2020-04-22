@@ -12,8 +12,10 @@ from database import session, engine
 # you should really use something like Alembic, but that's a topic for another day
 models.Base.metadata.create_all(bind=engine)
 
+# Initializes the FastAPI application
 app = FastAPI()
 
+# Just disabling CORS to allow for any hosts to connect - just for development
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
