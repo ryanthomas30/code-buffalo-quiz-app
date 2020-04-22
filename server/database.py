@@ -6,6 +6,3 @@ engine = create_engine('postgresql://quiz_app_user:password@localhost:5432/quiz_
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
-
-Base.metadata.create_all(engine)
-

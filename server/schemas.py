@@ -13,14 +13,14 @@ class Question(BaseModel):
     class Config:
         orm_mode = True
 
-class QuizBase(BaseModel):
+class Quiz(BaseModel):
     title: str
     author: str
 
-class CreateQuizRequest(QuizBase):
+class CreateQuizRequest(Quiz):
     questions: List[Question]
 
-class QuizResponse(QuizBase):
+class QuizResponse(Quiz):
     id: int
 
     class Config:
