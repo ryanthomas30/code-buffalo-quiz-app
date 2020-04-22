@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { FlexBox, Header, Button, Link } from './components'
 
 /* Pages */
-import Home from './pages/Home'
 import CreateQuiz from './pages/CreateQuiz'
 import TakeQuiz from './pages/TakeQuiz'
 
@@ -43,11 +42,6 @@ const App = () => {
 			</MainHeader>
 			<div className='page' >
 				<Switch>
-					<Route
-						exact
-						path='/'
-						component={Home}
-					/>
 					<Route
 						path='/quiz/new'
 						component={CreateQuiz}
